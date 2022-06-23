@@ -8,8 +8,9 @@ const WrapperStyled = styled.div`
   padding: 12px 16px;
   border-bottom: 1px solid rgba(82, 38, 83);
 
-  .usernames {
+  .username {
     color: white;
+    margin-left: 8px;
   }
 `;
 
@@ -18,9 +19,9 @@ export default function UserInfor() {
     <WrapperStyled>
       <div>
         <Avatar>A</Avatar>
-        <Typography.Text>ABC</Typography.Text>
+        <Typography.Text className="username">ABC</Typography.Text>
       </div>
-      <Button>Logout</Button>
+      <Button ghost>Logout</Button>
     </WrapperStyled>
   );
 }
