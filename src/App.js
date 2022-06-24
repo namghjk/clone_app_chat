@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Switch>
-          <Route component={Login} path={"/login"}></Route>
-          <Route component={ChatRoom} path={"/"}></Route>
+          <Route component={Login} path="/login" />
+          <Route component={ChatRoom} path="/" />
         </Switch>
       </AuthProvider>
     </BrowserRouter>

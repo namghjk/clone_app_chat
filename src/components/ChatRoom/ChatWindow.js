@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Avatar, Tooltip } from "antd";
+import { Button, Avatar, Tooltip, Form, Input } from "antd";
 import { UserAddOutlined } from "@ant-design/icons";
+import Message from "./Message";
 
 const HeaderStyled = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 100px;
+  height: 56px;
   padding: 0 16px;
   align-items: center;
   border-bottom: 1px solid rgba(230, 230, 230);
@@ -33,12 +34,40 @@ const ButtonGroupStyled = styled.div`
   display: flex;
   align-items: center;
 `;
+const WrapperStyled = styled.div`
+  height: 100vh;
+`;
 
-const ContentStyled = styled.div``;
+const ContentStyled = styled.div`
+  height: calc(100% - 56px);
+  display: flex;
+  flex-direction: column;
+  padding: 11px;
+  justify-content: flex-end;
+`;
+
+const FormStyled = styled(Form)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 2px 2px 0;
+  border: 1px solid rgb(230, 230, 230);
+  border-radius: 2px;
+
+  .ant-form-item {
+    flex: 1;
+    margin-bottom: 0;
+  }
+`;
+
+const MessageListStyled = styled.div`
+  max-height: 100%;
+  over-flow-y: auto;
+`;
 
 export default function ChatWindow() {
   return (
-    <div>
+    <WrapperStyled>
       <HeaderStyled>
         <div className="header_infor">
           <p className="header_title">Room 1</p>
@@ -64,7 +93,44 @@ export default function ChatWindow() {
           </Avatar.Group>
         </ButtonGroupStyled>
       </HeaderStyled>
-      <ContentStyled></ContentStyled>
-    </div>
+      <ContentStyled>
+        <MessageListStyled>
+          <Message
+            text="Text"
+            photoURL={null}
+            displayName="Nam"
+            createDate={12312312414}
+          />
+          <Message
+            text="Text"
+            photoURL={null}
+            displayName="Nam"
+            createDate={12312312414}
+          />
+          <Message
+            text="Text"
+            photoURL={null}
+            displayName="Nam"
+            createDate={12312312414}
+          />
+          <Message
+            text="Text"
+            photoURL={null}
+            displayName="Nam"
+            createDate={12312312414}
+          />
+        </MessageListStyled>
+        <FormStyled>
+          <Form.Item>
+            <Input
+              placeholder="Text the message..."
+              bordered={false}
+              autoComplete="off"
+            />
+          </Form.Item>
+          <Button type="primary">Send</Button>
+        </FormStyled>
+      </ContentStyled>
+    </WrapperStyled>
   );
 }

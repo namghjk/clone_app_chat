@@ -25,7 +25,7 @@ const PanelStyled = styled(Panel)`
 
 const LinkStyled = styled(Typography.Link)`
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   color: white;
 `;
 
