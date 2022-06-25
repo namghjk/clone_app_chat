@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Button, Typography } from "antd";
 import firebase, { auth, db } from "../../firebase/config";
+import { addDocument } from "../../firebase/services";
 
 const { Title } = Typography;
 const fbProvider = new firebase.auth.FacebookAuthProvider();
@@ -9,7 +10,7 @@ export default function Login() {
   const handleFBLogin = async () => {
     const { additionalUserInfo, user } = await auth.signInWithPopup(fbProvider);
     if (additionalUserInfo?.isNewUser) {
-      db.collection("users").add({
+      addDocument("users", {
         displayName: user.displayName,
         email: user.email,
         photoURL: user.photoURL,
