@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { PlusSquareOutlined } from "@ant-design/icons";
 import useFirestore from "../../hooks/useFirestore";
 import { AuthContext } from "../../Context/AuthProvider";
+import { AppContext } from "../../Context/AppProvider";
 
 const { Panel } = Collapse;
 
@@ -32,21 +33,12 @@ const LinkStyled = styled(Typography.Link)`
 `;
 
 export default function RoomList() {
-  const {
-    user: { uid },
-  } = React.useContext(AuthContext);
-
-  const roomsCondition = React.useMemo(() => {
-    return {
-      fieldName: "members",
-      operator: "array-contains",
-      compareValue: uid,
-    };
-  }, [uid]);
-
-  const rooms = useFirestore("rooms", roomsCondition);
-
+  const { rooms, setIsAddRoomVisible } = React.useContext(AppContext);
   console.log({ rooms });
+
+  const handleAddRoom = () => {
+    setIsAddRoomVisible(true);
+  };
 
   return (
     <Collapse ghost defaultActiveKey={["1"]}>
@@ -59,6 +51,7 @@ export default function RoomList() {
           type="text"
           icon={<PlusSquareOutlined />}
           className="btn-add-room"
+          onClick={handleAddRoom}
         >
           Add room
         </Button>
