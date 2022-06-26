@@ -13,7 +13,7 @@ const useFirestore = (collection, condition) => {
         return;
       }
 
-      collectionRef.where(
+      collectionRef = collectionRef.where(
         condition.fieldName,
         condition.operator,
         condition.compareValue
@@ -35,4 +35,3 @@ const useFirestore = (collection, condition) => {
 };
 
 export default useFirestore;
- 
