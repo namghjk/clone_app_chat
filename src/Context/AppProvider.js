@@ -9,6 +9,8 @@ export const AppContext = React.createContext();
 
 export default function AppProvider({ children }) {
   const [isAddRoomVisible, setIsAddRoomVisible] = useState(false);
+  const [isInviteMemberVisible, setIsInviteMemberVisible] = useState(false);
+  const [selectedRoomId, setSelectedRoomId] = useState("");
 
   const {
     user: { uid },
@@ -24,10 +26,41 @@ export default function AppProvider({ children }) {
 
   const rooms = useFirestore("rooms", roomsCondition);
 
-  console.log({ rooms });
+  //   const selectedRoom = React.useMemo(
+  //     () => rooms.find((room) => room.id === selectedRoomId),
+  //     [rooms, selectedRoomId]
+  //   );
+
+  const selectedRoom = React.useMemo(
+    () => rooms.find((room) => room.id === selectedRoomId) || {},
+    [rooms, selectedRoomId]
+  );
+
+  const usersCondition = React.useMemo(() => {
+    return {
+      fieldName: "uid",
+      operator: "in",
+      compareValue: selectedRoom.members,
+    };
+  }, [selectedRoom.members]);
+
+  const members = useFirestore("users", usersCondition);
+
+  console.log({ members });
+
   return (
     <AppContext.Provider
-      value={{ rooms, isAddRoomVisible, setIsAddRoomVisible }}
+      value={{
+        rooms,
+        members,
+        selectedRoom,
+        isAddRoomVisible,
+        setIsAddRoomVisible,
+        selectedRoomId,
+        setSelectedRoomId,
+        isInviteMemberVisible,
+        setIsInviteMemberVisible,
+      }}
     >
       {children}
     </AppContext.Provider>
